@@ -1,0 +1,29 @@
+﻿@model WebApplication1.Models.Cuisin
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cuisin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Cuisin Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CuiName)
+        </dd>
+        <dt>
+            Cuisin Description
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descript)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

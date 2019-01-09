@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Cuisin>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Search:
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"
+                   placeholder="Cuisin..." />
+            <input type="submit" value="Search" class="btn btn-default" />
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cuisin Name
+            </th>
+            <th><a asp-action="Index" class="glyphicon glyphicon-refresh"></a></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuiName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CuiName">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CuiName">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CuiName">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

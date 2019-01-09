@@ -1,0 +1,41 @@
+﻿@model FoodiePal.ViewModels.CuisinResturantVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Resturant.RestName)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Cuisin
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CuisinNames)
+        </dd>
+        <dt>
+            Address
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resturant.RestAddress)
+        </dd>
+        <dt>
+            Phone Number
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resturant.PhoneNumber)
+        </dd>
+        <dt>
+            Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resturant.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

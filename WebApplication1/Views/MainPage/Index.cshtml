@@ -1,0 +1,46 @@
+﻿@model SiteUserVM
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+<h4>SiteUserVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.UserName != null)
+        {
+            @Html.Raw("<h1>Welcome " + ViewBag.UserName + "</h1>");
+        }
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="firstName" class="control-label"></label>
+                <input asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+        @Html.ActionLink("Clear",                 // Text
+                    "ClearCookie",        // Method
+                    "Home", new { key = "firstName" })
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

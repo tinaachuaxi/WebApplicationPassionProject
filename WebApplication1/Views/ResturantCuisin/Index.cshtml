@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FoodiePal.ViewModels.CuisinResturantVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<link rel="stylesheet" href="~/css/contentPage.css" />
+
+<h2>Index</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Resturant
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Cuisins
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resturant.RestName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resturant.RestAddress)
+                </td>
+                <td class="cuisins">
+                    @foreach (var c in item.CuisinNames)
+                    {
+                        if (c != (item.CuisinNames).Last())
+                        {
+                            <p> @Html.DisplayFor(cs => c), </p>
+                        }
+                        else
+                        {
+                            <p> @Html.DisplayFor(cs => c)</p>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Resturant.RestId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

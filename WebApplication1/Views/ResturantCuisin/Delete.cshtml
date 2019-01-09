@@ -1,0 +1,34 @@
+﻿@model WebApplication1.Models.ResturantCuisin
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ResturantCuisin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Cuisin Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CuiName)
+        </dd>
+        <dt>
+            ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RestId" />
+        <input type="hidden" asp-for="CuiName" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

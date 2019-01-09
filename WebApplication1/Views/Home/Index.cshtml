@@ -1,0 +1,104 @@
+﻿@model WebApplication1.Models.PaginatedList<FoodiePal.ViewModels.CuisinResturantVM>
+
+    <link rel="stylesheet" href="~/css/contentPage.css" />
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    @* Following the list view table *@
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    @if (ViewData["CurrentSort"].ToString() == "name_asc")
+    {
+        ViewData["SortCuisin"] = "cuisin_asc";
+        ViewData["SortName"] = "name_desc";
+    }
+    else if (ViewData["CurrentSort"].ToString() == "cuisin_asc")
+    {
+        ViewData["SortCuisin"] = "cuisin_asc";
+        ViewData["SortName"] = "name_desc";
+    }
+    else
+    {
+        //it's either title_desc or description_desc
+        ViewData["SortName"] = "name_asc";
+        ViewData["SortCuisin"] = "cuisin_asc";
+    }
+
+    <h2>Resturants</h2>
+    @if (ViewBag.UserName != null)
+    {
+        @Html.Raw("<p>Welcome " + ViewBag.UserName + "</p>");
+    }
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search:
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"
+                       placeholder="Resturant..." />
+                <input type="submit" value="Search" class="btn btn-default" />
+            </p>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a asp-action="Index" asp-route-sortOrder=@ViewData["SortName"]>Resturant</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder=@ViewData["SortCuisin"]>Cuisin</a></th>
+                <th><a asp-action="Index" class="glyphicon glyphicon-refresh"></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Resturant.RestName
+                    </td>
+                    <td class="cuisins">
+                        @foreach (var c in item.CuisinNames)
+                        {
+                            if (c != (item.CuisinNames).Last())
+                            {
+                                <p> @Html.DisplayFor(cs => c), </p>
+                            }
+                            else
+                            {
+                                <p> @Html.DisplayFor(cs => c)</p>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Resturant.RestId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Resturant.RestId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Resturant.RestId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+
