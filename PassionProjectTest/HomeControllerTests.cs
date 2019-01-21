@@ -22,5 +22,19 @@ namespace PassionProjectTest
             Assert.Equal(expected, actual);
 
         }
+
+        [Fact]
+        public void IndexViewSearch()
+        {
+            var dbContext = new FoodiePalContext();
+            var controller = new HomeController(dbContext);
+            string expected = "keyword";
+            var viewResult = Assert.IsType<ViewResult>(controller.Index("name_asc", expected, 1));
+            var model = Assert.IsType<PaginatedList<CuisinResturantVM>>(viewResult.Model);
+            foreach (CuisinResturantVM m in model)
+            {
+                Assert.Contains(expected, m.Resturant.RestName);
+            }
+        }
     }
 }
