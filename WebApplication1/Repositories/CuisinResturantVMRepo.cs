@@ -7,7 +7,7 @@ using WebApplication1.Models;
 
 namespace FoodiePal.Repositories
 {
-    public class CuisinResturantVMRepo
+    public class CuisinResturantVMRepo : ICuisinResturantVMRepo
     {
         private FoodiePalContext db;
         public CuisinResturantVMRepo(FoodiePalContext db)

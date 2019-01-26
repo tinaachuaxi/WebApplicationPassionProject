@@ -14,10 +14,12 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         private FoodiePalContext db;
+        private ICuisinResturantVMRepo repo;
 
-        public HomeController(FoodiePalContext db)
+        public HomeController(FoodiePalContext db, ICuisinResturantVMRepo repo)
         {
             this.db = db;
+            this.repo = repo;
         }
         
         public IActionResult Index(string sortOrder, string searchString, int? page)
@@ -28,7 +30,7 @@ namespace WebApplication1.Controllers
             ViewData["CurrentSort"] = sort;
             ViewData["CurrentFilter"] = search;
 
-            var resturants = new CuisinResturantVMRepo(db).getAll(sort, search);
+            var resturants = repo.getAll(sort, search);
             int pageSize = 2;
 
             return View(PaginatedList<CuisinResturantVM>.Create(resturants
