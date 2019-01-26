@@ -40,7 +40,7 @@ namespace FoodiePal.Repositories
                     rcList =
                         rcList.OrderBy(r => r.CuisinNames);
                     break;
-                case "title_desc":
+                case "name_desc":
                     rcList =
                         rcList.OrderByDescending(r => r.Resturant.RestName);
                     break;

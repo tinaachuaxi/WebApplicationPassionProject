@@ -11,5 +11,6 @@ namespace FoodiePal.ViewModels
     {
         public Resturant Resturant { get; set; }
         public IEnumerable<String> CuisinNames { get; set; }
+        
     }
 }

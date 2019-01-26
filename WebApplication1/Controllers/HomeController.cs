@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
 
             ViewData["CurrentSort"] = sort;
             ViewData["CurrentFilter"] = search;
-
+            
             var resturants = repo.getAll(sort, search);
             int pageSize = 2;
 
