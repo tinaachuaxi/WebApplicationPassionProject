@@ -23,7 +23,7 @@ namespace WebApplication1.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=tcp:chuxi.database.windows.net,1433;Initial Catalog=FoodiePal;Persist Security Info=False;User ID=chuaxi;Password=199488mimi!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlite("Data Source=.\\wwwroot\\sql.db");
             }
         }
 
@@ -101,6 +101,102 @@ namespace WebApplication1.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__resturant__rest___52593CB8");
             });
+
+            modelBuilder.Entity<Cuisin>().HasData(
+                new
+                {
+                    CuiName = "Chinese", Description="Cuisine of Chinese"
+                },
+                new
+                {
+                    CuiName = "Korean",
+                    Description = "Korean food"
+                },
+                new
+                {
+                    CuiName = "Canadian",
+                    Description = "Canadian food"
+                },
+                new
+                {
+                    CuiName = "Malaysian",
+                    Description = "Malaysian food"
+                }
+                );
+
+            modelBuilder.Entity<Resturant>().HasData(
+                new
+                {
+                    RestId = 1,
+                    RestName= "Peaceful Resturant",
+                    RestAddress = "2222 Seymour Street",
+                    PhoneNumber = "222-454-5345",
+                    Email = "peaceful@resturant"
+                },
+                new
+                {
+                    RestId = 2,
+                    RestName = "Sura",
+                    RestAddress = "2222 Robson Street",
+                    PhoneNumber = "222-454-5345",
+                    Email = "peaceful@resturant"
+                },
+                new
+                {
+                    RestId = 3,
+                    RestName = "A&W",
+                    RestAddress = "2222 Richards Street",
+                    PhoneNumber = "222-454-5345",
+                    Email = "peaceful@resturant"
+                },
+                new
+                {
+                    RestId = 4,
+                    RestName = "Banana Republic",
+                    RestAddress = "2222 Homer Street",
+                    PhoneNumber = "222-454-5345",
+                    Email = "peaceful@resturant"
+                },
+                new
+                {
+                    RestId = 5,
+                    RestName = "Dynasty",
+                    RestAddress = "2222 Howe Street",
+                    PhoneNumber = "222-454-5345",
+                    Email = "peaceful@resturant"
+                });
+
+            modelBuilder.Entity<ResturantCuisin>().HasData(
+                new
+                {
+                    CuiName = "Korean",
+                    RestId = 2
+                },
+                new
+                {
+                    CuiName = "Chinese",
+                    RestId = 1
+                },
+                new
+                {
+                    CuiName = "Malaysian",
+                    RestId = 4
+                },
+                new
+                {
+                    CuiName = "Canadian",
+                    RestId = 3
+                },
+                new
+                {
+                    CuiName = "Chinese",
+                    RestId = 5
+                },
+                new
+                {
+                    CuiName = "Chinese",
+                    RestId = 2
+                });
         }
     }
 }

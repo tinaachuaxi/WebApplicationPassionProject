@@ -26,8 +26,8 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection1 = Configuration.GetConnectionString("FoodiePalConnection");
-            services.AddDbContext<FoodiePalContext>(options => options.UseSqlServer(connection1));
+            //var connection1 = Configuration.GetConnectionString("FoodiePalConnection");
+            //services.AddDbContext<FoodiePalContext>(options => options.UseSqlServer(connection1));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -39,6 +39,9 @@ namespace WebApplication1
             // Adding this allows us to inject an instance of the ProductRepo to a controller.
             // Add this before AddMvc()
             services.AddScoped<ICuisinResturantVMRepo, CuisinResturantVMRepo>();
+
+            services.AddDbContext<FoodiePalContext>(options =>
+            options.UseSqlite("Data Source=.\\wwwroot\\sql.db"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddHttpContextAccessor();
